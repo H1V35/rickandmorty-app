@@ -9,11 +9,15 @@ interface CharacterAvatarProps {
 export function CharacterItem({ characterUrl }: CharacterAvatarProps) {
   const characterId = Number(characterUrl.split('/').pop());
 
-  const { character } = useCharacter({ characterId });
+  const { character, isLoading } = useCharacter({ characterId });
 
   return (
     <View style={styles.container}>
-      <Image source={{ uri: character?.image }} style={styles.avatar} />
+      {isLoading ? (
+        <Image source={require('~/assets/avatar-placeholder.png')} style={styles.avatar} />
+      ) : (
+        <Image source={{ uri: character?.image }} style={styles.avatar} />
+      )}
 
       <Text style={styles.name}>{character?.name}</Text>
     </View>

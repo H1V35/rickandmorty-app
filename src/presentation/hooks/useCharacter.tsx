@@ -7,12 +7,13 @@ interface Props {
 }
 
 export function useCharacter({ characterId }: Props) {
-  const { data: character } = useQuery({
+  const { data: character, isLoading } = useQuery({
     queryKey: ['character', characterId],
     queryFn: () => getCharacterById(characterId),
   });
 
   return {
     character,
+    isLoading,
   };
 }
