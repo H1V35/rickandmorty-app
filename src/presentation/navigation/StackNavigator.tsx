@@ -4,6 +4,7 @@ import { appColors } from '~/config/theme/app-theme';
 import { EpisodeScreen } from '~/presentation/screens/details/EpisodeScreen';
 import { LocationScreen } from '~/presentation/screens/details/LocationScreen';
 import { HomeScreen } from '~/presentation/screens/home/HomeScreen';
+import { SearchScreen } from '~/presentation/screens/search/SearchScreen';
 
 export type RootStackParams = {
   HomeScreen: undefined;
@@ -34,6 +35,7 @@ export function StackNavigator() {
         options={{ title: 'Rick and Morty' }}
         component={HomeScreen}
       />
+      <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="EpisodeScreen" component={EpisodeScreen} />
       <Stack.Screen name="LocationScreen" component={LocationScreen} />
     </Stack.Navigator>

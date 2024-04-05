@@ -10,7 +10,12 @@ export function HomeScreen() {
 
   React.useEffect(() => {
     navigation.setOptions({
-      headerRight: () => <SearchButton style={{ marginRight: 12 }} onPress={() => {}} />,
+      headerRight: () => (
+        <SearchButton
+          style={{ marginRight: 12 }}
+          onPress={() => navigation.navigate('SearchScreen')}
+        />
+      ),
     });
   }, []);
 
