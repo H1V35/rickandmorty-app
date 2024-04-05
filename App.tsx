@@ -1,11 +1,18 @@
-import { ScreenContent } from 'components/ScreenContent';
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Text, View } from 'react-native';
+
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <>
-      <ScreenContent title="Home" path="App.tsx" />
-      <StatusBar style="auto" />
-    </>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <View>
+          <Text>Hello World</Text>
+        </View>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 }
