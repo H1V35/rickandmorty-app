@@ -1,27 +1,28 @@
-import { type NavigationProp, useNavigation } from '@react-navigation/native';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 
-import { type RootStackParams } from '~/presentation/navigation/StackNavigator';
+import { getEpisodes } from '~/actions/get-episodes';
+import { EpisodeListItem } from '~/presentation/components/EpisodeListItem';
 
 export function EpisodesScreen() {
-  const navigation = useNavigation<NavigationProp<RootStackParams>>();
+  const { data, fetchNextPage } = useInfiniteQuery({
+    queryKey: ['episodes', 'infinite'],
+    initialPageParam: 1,
+    queryFn: async (params) => getEpisodes(params.pageParam),
+    getNextPageParam: (lastPage, pages) => pages.length + 1,
+  });
 
   return (
     <View>
-      <Pressable
-        onPress={() => navigation.navigate('EpisodeScreen', { episodeId: 1 })}
-        style={{
-          backgroundColor: 'skyblue',
-          borderRadius: 100,
-          marginTop: 10,
-          padding: 10,
-          marginBottom: 10,
-          width: '100%',
-          alignItems: 'center',
-        }}>
-        <Text>EPISODE 1</Text>
-      </Pressable>
+      <FlatList
+        data={data?.pages.flat() ?? []}
+        keyExtractor={(episode, index) => `${episode.id}-${index}`}
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => <EpisodeListItem item={item} />}
+        onEndReachedThreshold={0.8}
+        onEndReached={() => fetchNextPage()}
+      />
     </View>
   );
 }
