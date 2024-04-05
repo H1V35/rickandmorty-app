@@ -41,8 +41,8 @@ export function LocationScreen({ navigation, route }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 60,
     marginTop: 20,
+    minHeight: 60,
   },
 
   title: {

@@ -26,19 +26,19 @@ export function CharacterItem({ characterUrl }: CharacterAvatarProps) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 100,
-    height: 180,
-    marginHorizontal: 10,
+    alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     gap: 10,
+    height: 180,
+    marginHorizontal: 10,
+    width: 100,
   },
 
   avatar: {
-    width: 100,
-    height: 100,
     borderRadius: 100,
+    height: 100,
+    width: 100,
   },
 
   name: {
