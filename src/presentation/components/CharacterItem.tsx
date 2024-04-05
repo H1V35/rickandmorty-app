@@ -26,10 +26,10 @@ export function CharacterItem({ characterUrl }: CharacterAvatarProps) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10,
+    width: 100,
+    marginHorizontal: 10,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
     gap: 10,
   },

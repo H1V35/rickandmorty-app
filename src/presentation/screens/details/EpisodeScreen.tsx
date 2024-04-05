@@ -17,7 +17,7 @@ export function EpisodeScreen({ navigation, route }: Props) {
 
   React.useEffect(() => {
     navigation.setOptions({
-      title: episode?.name,
+      title: episode?.name || '',
       headerLeft: () => (
         <BackButton onPress={() => navigation.goBack()} style={{ marginLeft: 12 }} />
       ),
