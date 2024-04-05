@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { appColors, appTheme } from '~/config/theme/app-theme';
 import { CharacterList } from '~/presentation/components/CharacterList';
+import { CommentForm } from '~/presentation/components/CommentForm';
 import { BackButton } from '~/presentation/components/ui/BackButton';
 import { useEpisode } from '~/presentation/hooks/useEpisode';
 import { type RootStackParams } from '~/presentation/navigation/StackNavigator';
@@ -25,7 +26,7 @@ export function EpisodeScreen({ navigation, route }: Props) {
   }, [episode]);
 
   return (
-    <View>
+    <>
       <View style={[styles.container, appTheme.globalMarginX]}>
         <Text style={styles.title}>
           {episode?.episode}: {episode?.name}
@@ -34,17 +35,19 @@ export function EpisodeScreen({ navigation, route }: Props) {
         <Text style={styles.airDate}>{episode?.air_date}</Text>
       </View>
 
-      {episode?.characters.length !== 0 && (
-        <CharacterList title="Characters" characters={episode?.characters} />
-      )}
-    </View>
+      <CharacterList title="Characters" characters={episode?.characters} />
+
+      <View style={[appTheme.globalMarginX, { marginTop: 15 }]}>
+        <CommentForm />
+      </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 60,
     marginTop: 20,
+    minHeight: 60,
   },
 
   title: {

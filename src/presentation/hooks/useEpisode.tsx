@@ -7,12 +7,13 @@ interface Props {
 }
 
 export function useEpisode({ episodeId }: Props) {
-  const { data: episode } = useQuery({
+  const { data: episode, isLoading } = useQuery({
     queryKey: ['episode', episodeId],
     queryFn: () => getEpisodeById(episodeId),
   });
 
   return {
     episode,
+    isLoading,
   };
 }

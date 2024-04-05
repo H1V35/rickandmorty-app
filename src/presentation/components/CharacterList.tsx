@@ -11,8 +11,8 @@ interface Props {
 
 export function CharacterList({ title, characters }: Props) {
   return (
-    <>
-      <View style={[appTheme.globalMarginX, { marginTop: 25, marginBottom: 15 }]}>
+    <View style={styles.container}>
+      <View style={[appTheme.globalMarginX, { marginBottom: 15 }]}>
         <Text style={styles.title}>{title}</Text>
       </View>
 
@@ -24,11 +24,16 @@ export function CharacterList({ title, characters }: Props) {
         style={{ paddingHorizontal: 10 }}
         renderItem={({ item }) => <CharacterItem characterUrl={item} />}
       />
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginTop: 25,
+    minHeight: 220,
+  },
+
   title: {
     color: appColors.darkText,
     fontSize: 20,
