@@ -1,5 +1,4 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { Text } from 'react-native';
 
 import { appColors } from '../../config/theme/app-theme';
 
@@ -28,9 +27,6 @@ export function StackNavigator() {
           fontSize: 24,
           marginLeft: 12,
         },
-        headerRight: () => (
-          <Text style={{ marginRight: 12, color: appColors.whiteText, fontSize: 16 }}>Search</Text>
-        ),
       }}>
       <Stack.Screen
         name="HomeScreen"
