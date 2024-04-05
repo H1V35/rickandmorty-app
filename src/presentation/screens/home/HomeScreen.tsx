@@ -1,10 +1,7 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+
+import { TopTabsNavigator } from '~/presentation/navigation/TopTabsNavigator';
 
 export function HomeScreen() {
-  return (
-    <View>
-      <Text>HomeScreen</Text>
-    </View>
-  );
+  return <TopTabsNavigator />;
 }
