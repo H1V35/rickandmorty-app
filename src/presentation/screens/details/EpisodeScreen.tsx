@@ -1,6 +1,6 @@
 import { type StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
-import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { appColors, appTheme } from '~/config/theme/app-theme';
@@ -27,7 +27,10 @@ export function EpisodeScreen({ navigation, route }: Props) {
   }, [episode]);
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" keyboardVerticalOffset={60}>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'position' : 'padding'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 60}>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.container, appTheme.globalMarginX]}>
           <Text style={styles.title}>
