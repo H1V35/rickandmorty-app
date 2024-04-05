@@ -1,7 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
-import { getCharacterById } from '~/actions/get-character-by-id';
+import { useCharacter } from '../hooks/useCharacter';
 
 interface CharacterAvatarProps {
   characterUrl: string;
@@ -10,10 +9,7 @@ interface CharacterAvatarProps {
 export function CharacterItem({ characterUrl }: CharacterAvatarProps) {
   const characterId = Number(characterUrl.split('/').pop());
 
-  const { data: character } = useQuery({
-    queryKey: ['character', characterId],
-    queryFn: () => getCharacterById(characterId),
-  });
+  const { character } = useCharacter({ characterId });
 
   return (
     <View style={styles.container}>
@@ -27,6 +23,7 @@ export function CharacterItem({ characterUrl }: CharacterAvatarProps) {
 const styles = StyleSheet.create({
   container: {
     width: 100,
+    height: 180,
     marginHorizontal: 10,
     display: 'flex',
     flexDirection: 'column',
