@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, Alert, Pressable, Keyboard } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Alert, Pressable } from 'react-native';
 
 import { postComment } from '~/actions/post-comment';
 import { appColors } from '~/config/theme/app-theme';
@@ -36,8 +36,6 @@ export function CommentForm() {
     }
 
     postComment(comment);
-
-    Keyboard.dismiss();
 
     setComment({ id: '', name: '', email: '', text: '' });
   };
@@ -109,7 +107,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     paddingRight: 12,
     paddingTop: 10,
-    textAlignVertical: 'center',
+    textAlignVertical: 'top',
   },
 
   button: {

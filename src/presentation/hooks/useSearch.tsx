@@ -18,7 +18,7 @@ export function useSearch() {
     return 'None';
   });
 
-  const screenTitle = `Search ${previousTab !== 'None' && previousTab === 'Episodes' ? 'episodes' : 'locations'}`;
+  const screenTitle = `Search ${previousTab === 'Locations' ? 'locations' : 'episodes'}`;
 
   return {
     previousTab,

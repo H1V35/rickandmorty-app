@@ -1,6 +1,7 @@
 import { type StackScreenProps } from '@react-navigation/stack';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import { appColors, appTheme } from '~/config/theme/app-theme';
 import { CharacterList } from '~/presentation/components/CharacterList';
@@ -26,21 +27,23 @@ export function EpisodeScreen({ navigation, route }: Props) {
   }, [episode]);
 
   return (
-    <>
-      <View style={[styles.container, appTheme.globalMarginX]}>
-        <Text style={styles.title}>
-          {episode?.episode}: {episode?.name}
-        </Text>
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" keyboardVerticalOffset={60}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={[styles.container, appTheme.globalMarginX]}>
+          <Text style={styles.title}>
+            {episode?.episode}: {episode?.name}
+          </Text>
 
-        <Text style={styles.airDate}>{episode?.air_date}</Text>
-      </View>
+          <Text style={styles.airDate}>{episode?.air_date}</Text>
+        </View>
 
-      <CharacterList title="Characters" characters={episode?.characters} />
+        <CharacterList title="Characters" characters={episode?.characters} />
 
-      <View style={[appTheme.globalMarginX, { marginTop: 15 }]}>
-        <CommentForm />
-      </View>
-    </>
+        <View style={[appTheme.globalMarginX, { marginTop: 15, paddingBottom: 60 }]}>
+          <CommentForm />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
