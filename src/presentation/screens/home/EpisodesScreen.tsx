@@ -1,17 +1,10 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import React from 'react';
 import { FlatList, View } from 'react-native';
 
-import { getEpisodes } from '~/actions/get-episodes';
 import { EpisodeListItem } from '~/presentation/components/EpisodeListItem';
+import { useEpisodes } from '~/presentation/hooks/useEpisodes';
 
 export function EpisodesScreen() {
-  const { data, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['episodes', 'infinite'],
-    initialPageParam: 1,
-    queryFn: async (params) => getEpisodes(params.pageParam),
-    getNextPageParam: (lastPage, pages) => pages.length + 1,
-  });
+  const { data, fetchNextPage } = useEpisodes();
 
   return (
     <View>
