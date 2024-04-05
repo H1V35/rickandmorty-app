@@ -5,14 +5,15 @@ import { CharacterItem } from './CharacterItem';
 import { appColors, appTheme } from '~/config/theme/app-theme';
 
 interface Props {
+  title: string;
   characters: string[] | undefined;
 }
 
-export function CharacterList({ characters }: Props) {
+export function CharacterList({ title, characters }: Props) {
   return (
     <>
       <View style={[appTheme.globalMarginX, { marginTop: 25, marginBottom: 15 }]}>
-        <Text style={styles.title}>Characters</Text>
+        <Text style={styles.title}>{title}</Text>
       </View>
 
       <FlatList

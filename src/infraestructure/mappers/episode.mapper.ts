@@ -1,7 +1,7 @@
 import type { Episode } from '~/domain/entities/episode.entity';
-import type { Result } from '~/infraestructure/interfaces/rickandmortyapi.interfaces';
+import type { EpisodeResult } from '~/infraestructure/interfaces/rickandmortyapi.interfaces';
 
-export function fromEpisodeResultToEntity(result: Result): Episode {
+export function fromEpisodeResultToEntity(result: EpisodeResult): Episode {
   return {
     id: result.id,
     name: result.name,

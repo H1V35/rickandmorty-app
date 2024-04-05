@@ -34,13 +34,16 @@ export function EpisodeScreen({ navigation, route }: Props) {
         <Text style={styles.airDate}>{episode?.air_date}</Text>
       </View>
 
-      <CharacterList characters={episode?.characters} />
+      {episode?.characters.length !== 0 && (
+        <CharacterList title="Characters" characters={episode?.characters} />
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    minHeight: 60,
     marginTop: 20,
   },
 
