@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, Alert, Pressable } from 'react-native';
+import { View, TextInput, StyleSheet, Text, Alert, Pressable, Keyboard } from 'react-native';
 
+import { postComment } from '~/actions/post-comment';
 import { appColors } from '~/config/theme/app-theme';
 
-interface Comment {
+export interface Comment {
   id: string;
   name: string;
   email: string;
@@ -34,7 +35,9 @@ export function CommentForm() {
       return;
     }
 
-    console.warn(comment);
+    postComment(comment);
+
+    Keyboard.dismiss();
 
     setComment({ id: '', name: '', email: '', text: '' });
   };
