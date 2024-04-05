@@ -9,17 +9,17 @@ interface Props {
   item: Episode;
 }
 
-export function EpisodeListItem({ item }: Props) {
+export function EpisodeItem({ item }: Props) {
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
   return (
     <Pressable onPress={() => navigation.navigate('EpisodeScreen', { episodeId: item.id })}>
       <View style={styles.container}>
-        <Text style={styles.episodeText}>{item.episode}</Text>
+        <Text style={styles.episode}>{item.episode}</Text>
 
-        <Text style={styles.nameText}>{item.name}</Text>
+        <Text style={styles.name}>{item.name}</Text>
 
-        <Text style={styles.airDateText}>{item.air_date}</Text>
+        <Text style={styles.airDate}>{item.air_date}</Text>
       </View>
     </Pressable>
   );
@@ -34,19 +34,19 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 
-  episodeText: {
+  episode: {
     color: appColors.darkGrayText,
     fontSize: 14,
     fontWeight: '400',
   },
 
-  nameText: {
+  name: {
     color: appColors.darkText,
     fontSize: 22,
     fontWeight: '500',
   },
 
-  airDateText: {
+  airDate: {
     color: appColors.darkGrayText,
     fontSize: 14,
     fontWeight: '400',
