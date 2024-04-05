@@ -1,11 +1,19 @@
 import { type NavigationProp, useNavigation, useNavigationState } from '@react-navigation/native';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, TextInput, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { appColors, appTheme } from '~/config/theme/app-theme';
+import { EpisodeList } from '~/presentation/components/EpisodeList';
 import { BackButton } from '~/presentation/components/ui/BackButton';
+import { useSearchEpisodes } from '~/presentation/hooks/useSearchEpisodes';
 import { type RootStackParams } from '~/presentation/navigation/StackNavigator';
 
 export function SearchScreen() {
+  const [search, setSearch] = React.useState('');
+
+  const { data, isLoading, fetchNextPage } = useSearchEpisodes({ search });
+  const { bottom } = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
 
   const previousTab = useNavigationState((state) => {
@@ -25,7 +33,7 @@ export function SearchScreen() {
     return 'None';
   });
 
-  const screenTitle = `Search ${previousTab === 'Episodes' ? 'episodes' : 'locations'}`;
+  const screenTitle = `Search ${previousTab !== 'None' && previousTab === 'Episodes' ? 'episodes' : 'locations'}`;
 
   React.useEffect(() => {
     navigation.setOptions({
@@ -37,10 +45,41 @@ export function SearchScreen() {
   }, []);
 
   return (
-    <View>
-      <Text>SearchScreen</Text>
+    <View style={[{ paddingBottom: bottom + 50 }, styles.container]}>
+      <View style={appTheme.globalMarginX}>
+        <TextInput
+          placeholder="Search"
+          autoFocus
+          autoCorrect={false}
+          onChangeText={setSearch}
+          value={search}
+          style={styles.searchInput}
+        />
 
-      <Text>Previous tab: {previousTab}</Text>
+        {isLoading && (
+          <ActivityIndicator size="large" color={appColors.primary} style={{ paddingTop: 20 }} />
+        )}
+      </View>
+
+      {search && previousTab === 'Episodes' && (
+        <EpisodeList data={data} fetchNextPage={fetchNextPage} />
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: appColors.whiteBackground,
+    flex: 1,
+  },
+
+  searchInput: {
+    borderBottomWidth: 2,
+    borderColor: appColors.primary,
+    fontSize: 26,
+    marginBottom: 10,
+    marginTop: 30,
+    paddingBottom: 10,
+  },
+});
