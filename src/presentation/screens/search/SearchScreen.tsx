@@ -1,39 +1,23 @@
-import { type NavigationProp, useNavigation, useNavigationState } from '@react-navigation/native';
+import { type NavigationProp, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ActivityIndicator, StyleSheet, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { appColors, appTheme } from '~/config/theme/app-theme';
 import { EpisodeList } from '~/presentation/components/EpisodeList';
+import { LocationList } from '~/presentation/components/LocationList';
 import { BackButton } from '~/presentation/components/ui/BackButton';
-import { useSearchEpisodes } from '~/presentation/hooks/useSearchEpisodes';
+import { useSearch } from '~/presentation/hooks/useSearch';
+import { useSearchRequest } from '~/presentation/hooks/useSearchRequest';
 import { type RootStackParams } from '~/presentation/navigation/StackNavigator';
 
 export function SearchScreen() {
   const [search, setSearch] = React.useState('');
 
-  const { data, isLoading, fetchNextPage } = useSearchEpisodes({ search });
+  const { previousTab, screenTitle } = useSearch();
+  const { data, isLoading, fetchNextPage } = useSearchRequest({ previousTab, search });
   const { bottom } = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<RootStackParams>>();
-
-  const previousTab = useNavigationState((state) => {
-    const tabNavigator = state.routes.find((route) => route.name === 'HomeScreen');
-
-    if (
-      tabNavigator &&
-      tabNavigator.state &&
-      'routes' in tabNavigator.state &&
-      'index' in tabNavigator.state &&
-      typeof tabNavigator.state.index === 'number'
-    ) {
-      const activeRoute = tabNavigator.state.routes[tabNavigator.state.index];
-      return activeRoute.name;
-    }
-
-    return 'None';
-  });
-
-  const screenTitle = `Search ${previousTab !== 'None' && previousTab === 'Episodes' ? 'episodes' : 'locations'}`;
 
   React.useEffect(() => {
     navigation.setOptions({
@@ -63,6 +47,10 @@ export function SearchScreen() {
 
       {search && previousTab === 'Episodes' && (
         <EpisodeList data={data} fetchNextPage={fetchNextPage} />
+      )}
+
+      {search && previousTab === 'Locations' && (
+        <LocationList data={data} fetchNextPage={fetchNextPage} />
       )}
     </View>
   );
