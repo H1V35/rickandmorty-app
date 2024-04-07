@@ -1,5 +1,9 @@
 # Rick and Morty App
 
+<div align="center">
+  <video src="https://github.com/H1V35/rickandmorty-app/assets/58390134/304141f8-b709-48d8-8b57-1595df3ab79c" alt="Demo Video">
+</div>
+
 ## 👽 Description
 
 RickandMortyApp is a native Android and iOS application built with React Native and Expo using TypeScript. It showcases information related to the popular TV series Rick and Morty. The app includes several key screens:
